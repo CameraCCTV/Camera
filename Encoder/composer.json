@@ -1,0 +1,13 @@
+{
+    "name": "matthewbaggett/camera-encoder-registration",
+    "require": {
+        "raveren/kint": "^1.0",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "Matthew Baggett",
+            "email": "matthew@baggett.me"
+        }
+    ]
+}

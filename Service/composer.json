@@ -1,0 +1,13 @@
+{
+    "name": "matthewbaggett/camera-registration",
+    "require": {
+        "raveren/kint": "^1.0",
+        "symfony/yaml": "^3.1"
+    },
+    "authors": [
+        {
+            "name": "Matthew Baggett",
+            "email": "matthew@baggett.me"
+        }
+    ]
+}
