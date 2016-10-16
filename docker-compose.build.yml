@@ -1,0 +1,65 @@
+service:
+  build: ./Service
+  volumes:
+   - "./Service:/app"
+  environment:
+   - VIRTUAL_HOST=cams.dev
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
+  ports:
+   - '80:8080'
+
+encoder_front:
+  build: ./Encoder
+  volumes:
+   - "./Encoder:/app"
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=front
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.2:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+
+encoder_back:
+  build: ./Encoder
+  volumes:
+   - "./Encoder:/app"
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=back
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.3:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+
+encoder_driveway:
+  build: ./Encoder
+  volumes:
+   - "./Encoder:/app"
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=driveway
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.1:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+
+encoder_ratcam:
+  build: ./Encoder
+  volumes:
+   - "./Encoder:/app"
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=ratcam
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.4:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+
+encoder_cartesian:
+  build: ./Encoder
+  volumes:
+   - "./Encoder:/app"
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=cartesian
+   - CAMERA_SOURCE=http://a3e11fed.ngrok.io/cam1.webm

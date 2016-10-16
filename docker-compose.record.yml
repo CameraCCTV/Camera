@@ -1,0 +1,36 @@
+service:
+  build: ./Service
+  volumes:
+   - "./Service:/app"
+  environment:
+   - VIRTUAL_HOST=cams.dev
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
+  ports:
+   - '80:8080'
+
+encoder_ratcam:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=ratcam
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.4:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+
+encoder_cartesian:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=cartesian
+   - CAMERA_SOURCE=http://a3e11fed.ngrok.io/cam1.webm
+
+recorder:
+  build: ./Recorder
+  volumes:
+   - "/media/CCTV:/video"
+   - "./Recorder:/app"
+  links:
+   - service
