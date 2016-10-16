@@ -56,6 +56,5 @@ recorder:
   image: camera/recorder
   volumes:
    - "/media/CCTV:/video"
-   - "./Recorder:/app"
   links:
    - service

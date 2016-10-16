@@ -111,6 +111,10 @@ if(!$bytesWrittenToEtc){
     echo "Could not write to /etc/ffserver.conf!\n";
 }
 
-echo "Killing FFSERVER ... ";
-passthru("killall -9 ffserver");
-echo "DONE.\n\n";
+if($bytesWrittenToTemp > 0 && $bytesWrittenToEtc > 0) {
+    echo "Killing FFSERVER ... ";
+    passthru("killall -9 ffserver");
+    echo "DONE.\n\n";
+}else{
+    echo "Failed to write config to Register camera\n";
+}

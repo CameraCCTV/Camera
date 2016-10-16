@@ -89,4 +89,5 @@ RUN chmod 777 /etc/ffserver.conf
 RUN chsh -s /bin/bash www-data
 
 ADD ./ /app
+RUN chmod 777 -R conf
 EXPOSE 80 8080
