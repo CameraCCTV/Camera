@@ -40,13 +40,16 @@ foreach(scandir($configDir) as $item){
     }
 }
 
+$maxClients = isset($environment['SERVER_MAX_CLIENTS']) ? $environment['SERVER_MAX_CLIENTS'] : "30";
+$maxBandwidth = isset($environment['SERVER_MAX_BANDWIDTH']) ? $environment['SERVER_MAX_BANDWIDTH'] : "60000";
+$videoBitRate = isset($environment['VIDEO_BIT_RATE']) ? $environment['VIDEO_BIT_RATE'] : "3000";
 
 $ffserverConfig = "
 HTTPPort 8080
 HTTPBindAddress 0.0.0.0
 MaxHTTPConnections 2000
-MaxClients 30
-MaxBandwidth 60000
+MaxClients {$maxClients}
+MaxBandwidth {$maxBandwidth}
 CustomLog -
 
 <Stream index.html>
@@ -90,7 +93,7 @@ foreach($configs as $config){
 
   PreRoll 0
   StartSendOnKey
-  VideoBitRate 6000
+  VideoBitRate {$videoBitRate}
 </Stream>
 
     ";

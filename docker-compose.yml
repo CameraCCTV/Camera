@@ -4,6 +4,9 @@ service:
    - "./Service:/app"
   environment:
    - VIRTUAL_HOST=cams.dev
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
   ports:
    - '80:8080'
 
