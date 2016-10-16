@@ -12,7 +12,8 @@ $configPath = $configDir . $requestBody->cameraName . ".yml";
 
 $config = [
     'cameraName' => $requestBody->cameraName,
-    'cameraSource' => $requestBody->cameraSource
+    'cameraSource' => $requestBody->cameraSource,
+    'audioAllowed' => $requestBody->audioAllowed,
 ];
 $config = \Symfony\Component\Yaml\Yaml::dump($config);
 
@@ -62,6 +63,34 @@ CustomLog -
 
 foreach($configs as $config){
     $settings = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($config));
+
+    if($settings['audioAllowed']) {
+        $audioCodec = [
+            "AudioCodec vorbis",
+            "AudioBitRate 64",
+            "AudioChannels 1",
+            "AudioSampleRate 48000",
+            "AVOptionAudio flags +global_header",
+        ];
+    }else{
+        $audioCodec = [
+            'NoAudio'
+        ];
+    }
+
+    $videoCodec = [
+        "VideoCodec libvpx",
+        "VideoSize 640x360",
+        "VideoFrameRate 15",
+        "VideoGopSize 15",
+        "AVOptionVideo flags +global_header",
+        "AVOptionVideo cpu-used 0",
+        "AVOptionVideo qmin 1",
+        "AVOptionVideo qmax 31",
+        "AVOptionVideo quality good",
+    ];
+    $audioCodec = implode("\n  ", $audioCodec);
+    $videoCodec = implode("\n  ", $videoCodec);
     $ffserverConfig.= "
 <Feed {$settings['cameraName']}.ffm>
   File /tmp/{$settings['cameraName']}.ffm
@@ -74,26 +103,24 @@ foreach($configs as $config){
 <Stream {$settings['cameraName']}.webm>
   Feed {$settings['cameraName']}.ffm
   Format webm
-
-  AudioCodec vorbis
-  AudioBitRate 64
-  AudioChannels 1
-  AudioSampleRate 48000
-  AVOptionAudio flags +global_header
-
-  VideoCodec libvpx
-  VideoSize 640x360
-  VideoFrameRate 15
-  VideoGopSize 15
-  AVOptionVideo flags +global_header
-  AVOptionVideo cpu-used 0
-  AVOptionVideo qmin 1
-  AVOptionVideo qmax 31
-  AVOptionVideo quality good
+  
+  {$audioCodec}
+  
+  {$videoCodec}
 
   PreRoll 0
   StartSendOnKey
   VideoBitRate {$videoBitRate}
+</Stream>
+
+<Stream {$settings['cameraName']}.jpg>
+    Feed {$settings['cameraName']}.ffm
+    Format jpeg
+    VideoFrameRate 2
+    VideoIntraOnly
+    VideoSize 1280x720
+    NoAudio
+    Strict -1
 </Stream>
 
     ";

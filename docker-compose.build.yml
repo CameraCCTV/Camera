@@ -31,6 +31,7 @@ encoder_back:
    - CAMERA_NAME=back
    - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.3:554/onvif1
    - CAMERA_OPTIONS=-rtsp_transport udp
+   - CAMERA_AUDIO_DISABLED=disabled
 
 encoder_driveway:
   build: ./Encoder
@@ -63,3 +64,11 @@ encoder_cartesian:
   environment:
    - CAMERA_NAME=cartesian
    - CAMERA_SOURCE=http://a3e11fed.ngrok.io/cam1.webm
+
+#recorder:
+#  build: ./Recorder
+#  volumes:
+#   - "/media/CCTV:/video"
+#   - "./Recorder:/app"
+#  links:
+#   - service

@@ -11,7 +11,8 @@ $baseUrl = "http://{$service['host']}:{$service['port']}";
 echo "Registering Camera {$cameraName} with service\n";
 $registrationJson = [
     'cameraName' => $cameraName,
-    'cameraSource' => $cameraSource
+    'cameraSource' => $cameraSource,
+    'audioAllowed' => (!isset($environment['CAMERA_AUDIO_DISABLED'])) ? true : false,
 ];
 
 $client = new GuzzleHttp\Client();
