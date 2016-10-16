@@ -16,6 +16,7 @@ foreach($response['cameras'] as $camera){
     $runScript = "#!/usr/bin/env bash
 mkdir -p /video/{$cameraName};
 while true; do
+    sleep 15;
     ffmpeg \\
         -i http://service:8080/{$cameraName}.webm \\
         -loglevel info \\
