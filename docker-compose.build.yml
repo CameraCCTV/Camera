@@ -65,10 +65,10 @@ encoder_cartesian:
    - CAMERA_NAME=cartesian
    - CAMERA_SOURCE=http://a3e11fed.ngrok.io/cam1.webm
 
-#recorder:
-#  build: ./Recorder
-#  volumes:
-#   - "/media/CCTV:/video"
-#   - "./Recorder:/app"
-#  links:
-#   - service
+recorder:
+  build: ./Recorder
+  volumes:
+   - "/tmp/CCTV:/video"
+   - "./Recorder:/app"
+  links:
+   - service
