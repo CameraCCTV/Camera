@@ -52,6 +52,7 @@ MaxHTTPConnections 2000
 MaxClients {$maxClients}
 MaxBandwidth {$maxBandwidth}
 CustomLog -
+NoDefaults
 
 <Stream index.html>
   Format status
@@ -64,15 +65,17 @@ CustomLog -
 foreach($configs as $config){
     $settings = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($config));
 
-    if($settings['audioAllowed']) {
-        $audioCodec = [
-            "AudioCodec vorbis",
-            "AudioBitRate 64",
-            "AudioChannels 1",
-            "AudioSampleRate 48000",
-            "AVOptionAudio flags +global_header",
-        ];
-    }else{
+
+    $audioCodec = [
+        "AudioCodec vorbis",
+        "AudioBitRate 64",
+        "AudioChannels 1",
+        "AudioSampleRate 48000",
+        "AVOptionAudio flags +global_header",
+    ];
+
+    // If no audio is allowed, replace the audio block.
+    if(!$settings['audioAllowed']) {
         $audioCodec = [
             'NoAudio'
         ];
@@ -83,6 +86,11 @@ foreach($configs as $config){
         "VideoSize 640x360",
         "VideoFrameRate 15",
         "VideoGopSize 15",
+        "VideoBitRate {$videoBitRate}",
+
+        "PreRoll 0",
+        "StartSendOnKey",
+
         "AVOptionVideo flags +global_header",
         "AVOptionVideo cpu-used 0",
         "AVOptionVideo qmin 1",
@@ -108,20 +116,18 @@ foreach($configs as $config){
   
   {$videoCodec}
 
-  PreRoll 0
-  StartSendOnKey
-  VideoBitRate {$videoBitRate}
+  
 </Stream>
 
-<Stream {$settings['cameraName']}.jpg>
-    Feed {$settings['cameraName']}.ffm
-    Format jpeg
-    VideoFrameRate 2
-    VideoIntraOnly
-    VideoSize 1280x720
-    NoAudio
-    Strict -1
-</Stream>
+#<Stream {$settings['cameraName']}.jpg>
+#    Feed {$settings['cameraName']}.ffm
+#    Format jpeg
+#    VideoFrameRate 2
+#    VideoIntraOnly
+#    VideoSize 1280x720
+#    NoAudio
+#    Strict -1
+#</Stream>
 
     ";
 }
