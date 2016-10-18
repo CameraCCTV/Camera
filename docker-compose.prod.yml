@@ -2,6 +2,7 @@ service:
   image: camera/server
   environment:
    - VIRTUAL_HOST=cams.dev
+   - EXCLUDE_PORTS=80
    - SERVER_MAX_CLIENTS=30
    - SERVER_MAX_BANDWIDTH=600000
    - VIDEO_BIT_RATE=13333
@@ -25,6 +26,7 @@ encoder_back:
    - CAMERA_NAME=back
    - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.3:554/onvif1
    - CAMERA_OPTIONS=-rtsp_transport udp
+   - CAMERA_AUDIO_DISABLED=disabled
 
 encoder_driveway:
   image: camera/encoder

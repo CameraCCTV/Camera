@@ -1,22 +1,50 @@
-service:
-  build: ./Service
+haproxy:
+  image: tutum/haproxy:latest
+  environment:
+    - 'STATS_AUTH=stats:CaptainMorgan'
+    - TIMEOUT=connect 50000, client 500000, server 500000
+  links:
+    - web
+    - service
+  ports:
+    - '127.0.0.99:80:80'
+    - '127.0.0.99:1936:1936'
+  restart: always
+
+web:
+  build: ./Web
   volumes:
-   - "./Service:/app"
+   - "./Web:/app"
   environment:
    - VIRTUAL_HOST=cams.dev
    - SERVER_MAX_CLIENTS=30
    - SERVER_MAX_BANDWIDTH=600000
    - VIDEO_BIT_RATE=13333
-  ports:
-   - '80:8080'
+
+service:
+  image: camera/encoder
+  environment:
+   - VIRTUAL_HOST=streams.cams.dev
+   - EXCLUDE_PORTS=80
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
 
 encoder_driveway:
-  build: ./Encoder
-  volumes:
-   - "./Encoder:/app"
+  image: camera/encoder
   links:
    - service
   environment:
    - CAMERA_NAME=driveway
-   - CAMERA_SOURCE=rtsp://guest:guest@10.0.0.219:554/onvif1
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.1:554/onvif1
    - CAMERA_OPTIONS= -buffer_size 5120000
+
+encoder_back:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=back
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.3:554/onvif1
+   - CAMERA_OPTIONS=-rtsp_transport udp
+   - CAMERA_AUDIO_DISABLED=disabled
