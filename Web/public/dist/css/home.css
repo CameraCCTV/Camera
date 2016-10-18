@@ -1,0 +1,13 @@
+/* line 1, ../../../scss/home.scss */
+body {
+  padding-top: 5rem; }
+  /* line 3, ../../../scss/home.scss */
+  body .home {
+    padding: 3rem 1.5rem;
+    text-align: center; }
+    /* line 6, ../../../scss/home.scss */
+    body .home #ratcam {
+      margin-left: auto;
+      margin-right: auto; }
+
+/*# sourceMappingURL=home.css.map */

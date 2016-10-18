@@ -1,0 +1,16 @@
+{% extends "template.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home">
+    <h1>Ratc.am</h1>
+    <p class="lead">Come spy on rats inside Ratimo Bay</p>
+    <video id="ratcam" class="video-js vjs-default-skin" data-setup='{ "controls": true, "autoplay": true, "preload": "metadata", "poster": "http://geusebio.plus.com:10000/ratcam.jpg" }' >
+        <source src="http://geusebio.plus.com:10000/ratcam.webm" type="video/webm">
+
+        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+    <p>Note: Firefox support for webm is broken. Don't use firefox to view this.</p>
+</div>
+{% endblock %}
