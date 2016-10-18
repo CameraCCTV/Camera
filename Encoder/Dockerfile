@@ -11,6 +11,19 @@ RUN add-apt-repository universe && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN apt update && \
+    apt -yq install wget build-essential && \
+    mkdir live555 && cd live555 && \
+    wget http://www.live555.com/liveMedia/public/live555-latest.tar.gz && \
+    tar -xzf live555-latest.tar.gz && \
+    cd live && \
+    ./genMakefiles linux && \
+    make && \
+    make install && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
 RUN mkdir /app
 ADD . /app
 RUN mkdir /etc/service/ffmpeg
