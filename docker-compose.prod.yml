@@ -7,7 +7,7 @@ service:
    - SERVER_MAX_BANDWIDTH=600000
    - VIDEO_BIT_RATE=13333
   ports:
-   - '80:8080'
+   - '127.0.4.1:80:8080'
 
 encoder_front:
   image: camera/encoder
@@ -52,7 +52,7 @@ encoder_cartesian:
    - service
   environment:
    - CAMERA_NAME=cartesian
-   - CAMERA_SOURCE=http://a3e11fed.ngrok.io/cam1.webm
+   - CAMERA_SOURCE=http://a3e11fed.ngrok.io/main.webm
 
 recorder:
   image: camera/recorder
