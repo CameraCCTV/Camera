@@ -119,15 +119,15 @@ foreach($configs as $config){
   
 </Stream>
 
-#<Stream {$settings['cameraName']}.jpg>
-#    Feed {$settings['cameraName']}.ffm
-#    Format jpeg
-#    VideoFrameRate 2
-#    VideoIntraOnly
-#    VideoSize 1280x720
-#    NoAudio
-#    Strict -1
-#</Stream>
+<Stream {$settings['cameraName']}.jpg>
+    Feed {$settings['cameraName']}.ffm
+    Format jpeg
+    VideoFrameRate 2
+    VideoIntraOnly
+    VideoSize 640x360
+    NoAudio
+    Strict -1
+</Stream>
 
     ";
 }
