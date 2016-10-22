@@ -1,53 +1,48 @@
-/* line 2, ../../../scss/album.scss */
-body.camera_list .container {
-  width: 1330px;
-  max-width: 1330px; }
-
-/* line 8, ../../../scss/album.scss */
+/* line 3, ../../../scss/album.scss */
 .navbar {
   margin-bottom: 0; }
 
-/* line 13, ../../../scss/album.scss */
+/* line 8, ../../../scss/album.scss */
 .navbar-collapse .container-fluid {
   padding: 2rem 2.5rem;
   border-bottom: 1px solid #55595c; }
-/* line 17, ../../../scss/album.scss */
+/* line 12, ../../../scss/album.scss */
 .navbar-collapse h4, .navbar-collapse .text-muted {
   color: #818a91; }
 
-/* line 22, ../../../scss/album.scss */
+/* line 17, ../../../scss/album.scss */
 .about {
   float: left;
   max-width: 30rem;
   margin-right: 3rem; }
 
-/* line 28, ../../../scss/album.scss */
+/* line 23, ../../../scss/album.scss */
 .social a {
   font-weight: 500;
   color: #eceeef; }
-  /* line 31, ../../../scss/album.scss */
+  /* line 26, ../../../scss/album.scss */
   .social a:hover {
     color: #fff; }
 
-/* line 36, ../../../scss/album.scss */
+/* line 31, ../../../scss/album.scss */
 .jumbotron {
   padding-top: 6rem;
   padding-bottom: 6rem;
   margin-bottom: 0;
   background-color: #fff; }
-  /* line 41, ../../../scss/album.scss */
+  /* line 36, ../../../scss/album.scss */
   .jumbotron p:last-child {
     margin-bottom: 0; }
 
-/* line 46, ../../../scss/album.scss */
+/* line 41, ../../../scss/album.scss */
 .jumbotron-heading {
   font-weight: 300; }
 
-/* line 50, ../../../scss/album.scss */
+/* line 45, ../../../scss/album.scss */
 .jumbotron .container {
   max-width: 40rem; }
 
-/* line 54, ../../../scss/album.scss */
+/* line 49, ../../../scss/album.scss */
 .album {
   min-height: 50rem;
   /* Can be removed; just added for demo purposes */
@@ -55,26 +50,26 @@ body.camera_list .container {
   padding-bottom: 3rem;
   background-color: #f7f7f7; }
 
-/* line 62, ../../../scss/album.scss */
+/* line 57, ../../../scss/album.scss */
 .card {
   float: left;
   width: 50%;
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0; }
-  /* line 68, ../../../scss/album.scss */
+  /* line 63, ../../../scss/album.scss */
   .card > img {
     margin-bottom: .75rem; }
 
-/* line 73, ../../../scss/album.scss */
+/* line 68, ../../../scss/album.scss */
 .card-text {
   font-size: 85%; }
 
-/* line 77, ../../../scss/album.scss */
+/* line 72, ../../../scss/album.scss */
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem; }
-  /* line 80, ../../../scss/album.scss */
+  /* line 75, ../../../scss/album.scss */
   footer p {
     margin-bottom: .25rem; }
 

@@ -66,6 +66,7 @@ module.exports = function (grunt) {
                         'public/dist/css/bootstrap.css',
                         //'public/dist/css/theme.css',
                         'public/dist/css/album.css',
+                        'public/dist/css/camera_list.css',
                         //'public/dist/css/home.css',
                         'public/dist/css/dashboard.css',
                         'vendor/videojs/video.js/dist/video-js.css',

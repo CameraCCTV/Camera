@@ -1,0 +1,9 @@
+/* line 2, ../../../scss/camera_list.scss */
+body.camera_list .container {
+  width: 1330px;
+  max-width: 1330px; }
+/* line 6, ../../../scss/camera_list.scss */
+body.camera_list .card.camera {
+  min-height: 436px; }
+
+/*# sourceMappingURL=camera_list.css.map */
