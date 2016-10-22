@@ -9,8 +9,8 @@
                 {% for camera in cameras %}
                     <div class="card camera" cameraname="{{ camera.cameraName }}">
                         <h2>{{ camera.cameraName }}</h2>
-                        <video id="{{ camera.cameraName }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "autoplay": true, "preload": "metadata", "poster": "http://{{ streaming_service_url }}/{{ camera.cameraName }}.jpg?r={{ "now"|date("u") }}" }' >
-                            <source src="http://{{ streaming_service_url }}/{{ camera.cameraName }}.webm?r={{ "now"|date("u") }}" type="video/webm">
+                        <video id="{{ camera.cameraName }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "autoplay": true, "preload": "metadata", "poster": "http://{{ streaming_service_url }}/{{ camera.cameraName }}.jpg?r={{ "now"|date("U") }}" }' >
+                            <source src="http://{{ streaming_service_url }}/{{ camera.cameraName }}.webm?r={{ "now"|date("U") }}" type="video/webm">
 
                             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
                         </video>
