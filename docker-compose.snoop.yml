@@ -8,11 +8,9 @@ service:
    - VIDEO_BIT_RATE=13333
 
 web:
-  build: ./Web
+  image: camera/web
   links:
     - service
-  volumes:
-   - "./Web:/app"
   environment:
    - VIRTUAL_HOST=cams.thru.io
    - SERVER_MAX_CLIENTS=30
