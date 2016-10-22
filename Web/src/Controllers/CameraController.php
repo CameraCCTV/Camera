@@ -1,9 +1,9 @@
 <?php
 
-namespace RatCam\Controllers;
+namespace MattCam\Controllers;
 
-use RatCam\Exceptions\CameraServiceException;
-use RatCam\Services\CameraService;
+use MattCam\Exceptions\CameraServiceException;
+use MattCam\Services\CameraService;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;

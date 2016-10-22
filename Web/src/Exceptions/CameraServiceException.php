@@ -1,6 +1,6 @@
 <?php
 
-namespace RatCam\Exceptions;
+namespace MattCam\Exceptions;
 
 
 class CameraServiceException extends \Exception{

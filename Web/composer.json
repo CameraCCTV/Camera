@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RatCam\\": "src"
+            "MattCam\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RatCam\\Test\\": "tests/"
+            "MattCam\\Test\\": "tests/"
         }
     }
 }

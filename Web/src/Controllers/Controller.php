@@ -1,6 +1,6 @@
 <?php
 
-namespace RatCam\Controllers;
+namespace MattCam\Controllers;
 
 use Interop\Container\ContainerInterface;
 use Slim\Container;

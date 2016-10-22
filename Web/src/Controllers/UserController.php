@@ -1,9 +1,9 @@
 <?php
 
-namespace RatCam\Controllers;
+namespace MattCam\Controllers;
 
 use Monolog\Logger;
-use RatCam\Services\UserService;
+use MattCam\Services\UserService;
 use Slim\Http\Request;
 use Slim\Http\Response;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace RatCam\Services;
+namespace MattCam\Services;
 
 use GuzzleHttp\Client as GuzzleClient;
-use RatCam\Exceptions\CameraServiceException;
+use MattCam\Exceptions\CameraServiceException;
 
 class CameraService extends Service
 {

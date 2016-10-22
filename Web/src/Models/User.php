@@ -1,5 +1,5 @@
 <?php
-namespace RatCam\Models;
+namespace MattCam\Models;
 
 class User extends \TigerKit\Models\User{
 

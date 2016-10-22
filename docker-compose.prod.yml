@@ -37,12 +37,12 @@ encoder_driveway:
    - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.1:554/onvif1
    - CAMERA_OPTIONS=-rtsp_transport udp
 
-encoder_ratcam:
+encoder_mattCam:
   image: camera/encoder
   links:
    - service
   environment:
-   - CAMERA_NAME=ratcam
+   - CAMERA_NAME=mattCam
    - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.4:554/onvif1
    - CAMERA_OPTIONS=-rtsp_transport udp
 

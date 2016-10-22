@@ -1,6 +1,6 @@
 <?php
 
-namespace RatCam\Services;
+namespace MattCam\Services;
 
 use Slim\Http\Request;
 use Slim\Http\Response;

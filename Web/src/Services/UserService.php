@@ -1,9 +1,9 @@
 <?php
 
-namespace RatCam\Services;
+namespace MattCam\Services;
 
-use RatCam\Models\Plug;
-use RatCam\Models\PlugBeat;
+use MattCam\Models\Plug;
+use MattCam\Models\PlugBeat;
 
 class UserService extends Service{
 

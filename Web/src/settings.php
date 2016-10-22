@@ -17,12 +17,12 @@ return [
         // Database settings
         'database' => [
             'technology' => 'Mysql',
-            // 'hostname'  => 'sql.ratCam.io',
+            // 'hostname'  => 'sql.mattCam.io',
             'hostname'     => 'sql.thru.io',
             'port'     => '3306',
-            'username' => 'ratCam',
+            'username' => 'mattCam',
             'password' => 'HS3l626SE34LuvD',
-            'database' => 'ratCam',
+            'database' => 'mattCam',
         ],
     ],
 ];
