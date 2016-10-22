@@ -1,0 +1,83 @@
+service:
+  image: camera/server
+  environment:
+   - VIRTUAL_HOST=streams.cams.thru.io
+   - EXCLUDE_PORTS=80
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
+
+web:
+  build: ./Web
+  links:
+    - service
+  volumes:
+   - "./Web:/app"
+  environment:
+   - VIRTUAL_HOST=cams.thru.io
+   - SERVER_MAX_CLIENTS=30
+   - SERVER_MAX_BANDWIDTH=600000
+   - VIDEO_BIT_RATE=13333
+
+encoder_front:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=front
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.2:554/onvif1
+   - CAMERA_SOAP=http://10.0.200.2:5000
+   - CAMERA_OPTIONS= -buffer_size 5120000
+   - CAMERA_ENABLE_PTZ=yes
+   - CAMERA_AUDIO_DISABLED=no
+
+encoder_back:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=back
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.3:554/onvif1
+   - CAMERA_SOAP=http://10.0.200.3:5000
+   - CAMERA_OPTIONS= -buffer_size 5120000
+   - CAMERA_ENABLE_PTZ=yes
+   - CAMERA_AUDIO_DISABLED=no
+
+encoder_driveway:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=driveway
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.1:554/onvif1
+   - CAMERA_SOAP=http://10.0.200.1:5000
+   - CAMERA_OPTIONS= -buffer_size 5120000
+   - CAMERA_ENABLE_PTZ=yes
+   - CAMERA_AUDIO_DISABLED=no
+
+encoder_ratcam:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=ratcam
+   - CAMERA_SOURCE=rtsp://guest:guest@10.0.200.4:554/onvif1
+   - CAMERA_SOAP=http://10.0.200.4:5000
+   - CAMERA_OPTIONS= -buffer_size 5120000
+   - CAMERA_ENABLE_PTZ=yes
+   - CAMERA_AUDIO_DISABLED=no
+
+encoder_cartesian:
+  image: camera/encoder
+  links:
+   - service
+  environment:
+   - CAMERA_NAME=cartesian
+   - CAMERA_SOURCE=http://a3e11fed.ngrok.io/main.webm
+
+recorder:
+  image: camera/recorder
+  volumes:
+   - "/media/CCTV:/video"
+  links:
+   - service
