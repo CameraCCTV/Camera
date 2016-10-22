@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d1633b46ffd08bef831bd3c9055a3151",
-    "content-hash": "bfe8266af649ab875471f96bdc8a7c88",
+    "hash": "d0be539ae8d9c1862554abf07ec653dd",
+    "content-hash": "59842464eba747dd1f75dd6c50a91ad5",
     "packages": [
         {
             "name": "components/jquery",
@@ -313,12 +313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthewbaggett/ponvif.git",
-                "reference": "519c33a171a840c06f620b0ee682b8a07db863b4"
+                "reference": "446b47f3c4bbdfee3587fd6c17482a730b807967"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthewbaggett/ponvif/zipball/519c33a171a840c06f620b0ee682b8a07db863b4",
-                "reference": "519c33a171a840c06f620b0ee682b8a07db863b4",
+                "url": "https://api.github.com/repos/matthewbaggett/ponvif/zipball/446b47f3c4bbdfee3587fd6c17482a730b807967",
+                "reference": "446b47f3c4bbdfee3587fd6c17482a730b807967",
                 "shasum": ""
             },
             "type": "library",
@@ -327,14 +327,16 @@
                     "lib/class.ponvif.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Matthew Baggett",
                     "email": "matthew@baggett.me"
                 }
             ],
-            "time": "2016-03-18 02:27:41"
+            "support": {
+                "source": "https://github.com/matthewbaggett/ponvif/tree/master"
+            },
+            "time": "2016-10-22 08:50:17"
         },
         {
             "name": "monolog/monolog",

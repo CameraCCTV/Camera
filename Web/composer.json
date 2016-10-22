@@ -10,6 +10,12 @@
             "email": "matthew@baggett.me"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:matthewbaggett/ponvif.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.0",
         "matthewbaggett/php-onvif": "dev-master",
