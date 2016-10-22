@@ -16,10 +16,14 @@ class CameraController extends Controller{
     /** @var CameraService */
     protected $cameraService;
 
+    protected $environment;
+
     public function __construct(Twig $renderer, CameraService $cameraService)
     {
         $this->renderer = $renderer;
         $this->cameraService = $cameraService;
+        $this->environment = array_merge($_ENV, $_SERVER);
+        ksort($this->environment);
     }
 
     public function renderHomepage(Request $request, Response $response, array $args = [])
@@ -29,6 +33,7 @@ class CameraController extends Controller{
             $response,
             'home/home.html.twig',
             [
+                'streaming_service_url' => $this->environment['SERVICE_1_ENV_VIRTUAL_HOST'],
                 'body_class' => "camera_list",
                 'cameras' => $cameras,
             ]
