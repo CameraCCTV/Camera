@@ -18,7 +18,8 @@ RUN cd /app && \
     composer install && \
     npm install && \
     rm -f /var/www/html && ln -s /app/public /var/www/html && \
-    chmod -R 777 /app/logs/
+    chmod -R 777 /app/logs/ && \
+    rm -Rf /app/.sass-cache/*
 
 
 

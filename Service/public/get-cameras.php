@@ -10,9 +10,7 @@ foreach(scandir($configDir) as $item){
         case substr($item,-4,4) == ".yml":
             $configFile = $configDir . $item;
             $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($configFile));
-            $cameras[] = [
-                'cameraName' => (string) $config['cameraName']
-            ];
+            $cameras[] = $config;
             break;
         default:
     }

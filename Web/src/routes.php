@@ -1,17 +1,8 @@
 <?php
 // Routes
 
-$app->get('/', \RatCam\Controllers\HomeController::class . ":renderHomepage");
-
-$app->get('/home', \RatCam\Controllers\HomeController::class . ":renderHomepage");
-
-$app->get('/dashboard', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Dashboard");
-
-    // Render index view
-    return $this->renderer->render($response, 'dash/dashboard.html.twig', $args);
-});
+$app->get('/', \RatCam\Controllers\CameraController::class . ":renderHomepage");
+$app->map(['get','post'], '/camera/ptz', \RatCam\Controllers\CameraController::class . ":doPtz");
 
 $app->group("/api", function(){
     $this->group("/v1", function(){

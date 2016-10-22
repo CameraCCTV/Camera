@@ -1,6 +1,8 @@
-body {
-  min-height: 75rem;
-  /* Can be removed; just added for demo purposes */
+body.camera_list{
+   .container{
+    width: 1330px;
+    max-width: 1330px;
+  }
 }
 
 .navbar {
@@ -59,7 +61,7 @@ body {
 
 .card {
   float: left;
-  width: 33.333%;
+  width: 50%;
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;

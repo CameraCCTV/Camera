@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 options: {
-                    noCache: false,
+                    noCache: true,
                     lineNumbers: true
                 },
                 files: [
@@ -65,8 +65,8 @@ module.exports = function (grunt) {
                     'public/dist/css/<%= pkg.name %>.min.css': [
                         'public/dist/css/bootstrap.css',
                         //'public/dist/css/theme.css',
-                        //'public/dist/css/album.css',
-                        'public/dist/css/home.css',
+                        'public/dist/css/album.css',
+                        //'public/dist/css/home.css',
                         'public/dist/css/dashboard.css',
                         'vendor/videojs/video.js/dist/video-js.css',
                     ]
@@ -93,11 +93,11 @@ module.exports = function (grunt) {
                 files: [
                     //'vendor/components/jquery/jquery.js',
                     //'vendor/twbs/bootstrap/js/src/dist/*.js',
-                    //'js/*.js',
+                    'js/*.js',
                     //'vendor/twbs/bootstrap/scss/*.scss',
                     'scss/*.scss'
                 ],
-                tasks: ['sass', 'concat'],
+                tasks: ['sass', 'concat', 'cssmin', 'uglify'],
                 options: {
                     spawn: false
                 }

@@ -10,11 +10,10 @@ $configDir = "/app/conf/";
 
 $configPath = $configDir . $requestBody->cameraName . ".yml";
 
-$config = [
-    'cameraName' => $requestBody->cameraName,
-    'cameraSource' => $requestBody->cameraSource,
-    'audioAllowed' => $requestBody->audioAllowed,
-];
+$config = [];
+foreach($requestBody as $k => $v){
+    $config[$k] = $v;
+}
 $config = \Symfony\Component\Yaml\Yaml::dump($config);
 
 echo "Writing to {$configPath}\n";

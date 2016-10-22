@@ -62,21 +62,10 @@ $container['database'] = function(\Slim\Container $container){
     return $database;
 };
 
-$container[\RatCam\Services\PlugService::class] = function(\Slim\Container $container){
-    $plugService = new \RatCam\Services\PlugService();
-    return $plugService;
-};
-
 $container[\RatCam\Services\UserService::class] = function(\Slim\Container $container){
     return new \RatCam\Services\UserService();
 };
 
-$container[\RatCam\Controllers\PlugController::class] = function(\Slim\Container $container){
-    return new \RatCam\Controllers\PlugController(
-        $container->get(\RatCam\Services\PlugService::class),
-        $container->get("logger")
-    );
-};
 
 $container[\RatCam\Controllers\UserController::class] = function(\Slim\Container $container){
     return new \RatCam\Controllers\UserController(
@@ -85,8 +74,13 @@ $container[\RatCam\Controllers\UserController::class] = function(\Slim\Container
     );
 };
 
-$container[\RatCam\Controllers\HomeController::class] = function(\Slim\Container $container){
-    return new \RatCam\Controllers\HomeController(
-        $container->get("renderer")
+$container[\RatCam\Controllers\CameraController::class] = function(\Slim\Container $container){
+    return new \RatCam\Controllers\CameraController(
+        $container->get("renderer"),
+        $container->get(\RatCam\Services\CameraService::class)
     );
+};
+
+$container[\RatCam\Services\CameraService::class] = function(\Slim\Container $container){
+    return new \RatCam\Services\CameraService();
 };

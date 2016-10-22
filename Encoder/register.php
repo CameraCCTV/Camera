@@ -10,9 +10,11 @@ $service = parse_url($environment['SERVICE_PORT']);
 $baseUrl = "http://{$service['host']}:{$service['port']}";
 echo "Registering Camera {$cameraName} with service\n";
 $registrationJson = [
-    'cameraName' => $cameraName,
+    'cameraName'   => $cameraName,
     'cameraSource' => $cameraSource,
-    'audioAllowed' => (!isset($environment['CAMERA_AUDIO_DISABLED'])) ? true : false,
+    'cameraSoap'    => isset($environment['CAMERA_SOAP']) ? $environment['CAMERA_SOAP'] : false,
+    'audioAllowed' => (!isset($environment['CAMERA_AUDIO_DISABLED']) && strtolower($environment['CAMERA_AUDIO_DISABLED']) == "yes") ? false : true,
+    'ptzAllowed'   => (isset($environment['CAMERA_ENABLE_PTZ'])     && strtolower($environment['CAMERA_ENABLE_PTZ'])     == "yes") ? true : false,
 ];
 
 $client = new GuzzleHttp\Client();
