@@ -64,21 +64,9 @@ NoDefaults
 foreach($configs as $config){
     $settings = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($config));
 
-
     $audioCodec = [
-        "AudioCodec vorbis",
-        "AudioBitRate 64",
-        "AudioChannels 1",
-        "AudioSampleRate 48000",
-        "AVOptionAudio flags +global_header",
+        'NoAudio'
     ];
-
-    // If no audio is allowed, replace the audio block.
-    if(!$settings['audioAllowed']) {
-        $audioCodec = [
-            'NoAudio'
-        ];
-    }
 
     $videoCodec = [
         "VideoCodec libvpx",

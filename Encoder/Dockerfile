@@ -6,6 +6,7 @@ RUN add-apt-repository universe && \
     apt-get update && \
     apt-get -yq install \
         ffmpeg \
+        livemedia-utils \
         unzip \
         php7.0-cli php7.0-curl php7.0-zip && \
     apt-get -yq upgrade && \
