@@ -40,7 +40,7 @@ class CameraService extends Service
         if (!$cameras[$camera]['cameraSoap']) {
             throw new CameraServiceException("CAMERA_SOAP is not configured on \"{$camera}\", or is not available.");
         }
-        if (!in_array($action, ['up', 'down', 'left', 'right'])) {
+        if (!in_array($action, ['up', 'down', 'left', 'right', 'up_fast', 'down_fast', 'left_fast', 'right_fast'])) {
             throw new CameraServiceException("PTZ action {$action} is not a valid action.");
         }
         $soapPath = parse_url($cameras[$camera]['cameraSoap']);
@@ -62,19 +62,46 @@ class CameraService extends Service
 
             $mediaUri = $ponvif->media_GetStreamUri($profileToken);
             #\Kint::dump($profileToken, $ptzNodeToken, $mediaUri);
+            
+            $step = 5;
+            $fast_multiplier = 5;
 
             switch ($action) {
                 case 'left':
-                    $ponvif->ptz_RelativeMove($profileToken, -5, 0, 5, 0);
+                    $ponvif->ptz_RelativeMove($profileToken, $step*-1, 0, $step, 0);
+                    break;
+                case 'left_fast':
+                    for($i = 0; $i < $fast_multiplier; $i++) {
+                        usleep(0.5*1000000);
+                        $ponvif->ptz_RelativeMove($profileToken, $step * -1, 0, $step, 0);
+                    }
                     break;
                 case 'right':
-                    $ponvif->ptz_RelativeMove($profileToken, 5, 0, 5, 0);
+                    $ponvif->ptz_RelativeMove($profileToken, $step, 0, $step, 0);
+                    break;
+                case 'right_fast':
+                    for($i = 0; $i < $fast_multiplier; $i++) {
+                        usleep(0.5*1000000);
+                        $ponvif->ptz_RelativeMove($profileToken, $step, 0, $step, 0);
+                    }
                     break;
                 case 'up':
-                    $ponvif->ptz_RelativeMove($profileToken, 0, 5, 0, 5);
+                    $ponvif->ptz_RelativeMove($profileToken, 0, $step, 0, $step);
+                    break;
+                case 'up_fast':
+                    for($i = 0; $i < $fast_multiplier; $i++) {
+                        usleep(0.5*1000000);
+                        $ponvif->ptz_RelativeMove($profileToken, 0, $step, 0, $step);
+                    }
                     break;
                 case 'down':
-                    $ponvif->ptz_RelativeMove($profileToken, 0, -5, 0, 5);
+                    $ponvif->ptz_RelativeMove($profileToken, 0, $step*-1, 0, $step);
+                    break;
+                case 'down_fast':
+                    for($i = 0; $i < $fast_multiplier; $i++) {
+                        usleep(0.5*1000000);
+                        $ponvif->ptz_RelativeMove($profileToken, 0, $step * -1, 0, $step);
+                    }
                     break;
             }
         }catch(\Exception $e){

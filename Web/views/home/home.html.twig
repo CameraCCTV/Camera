@@ -15,10 +15,78 @@
                             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
                         </video>
                         {% if camera.ptzAllowed %}
-                            <button type="button" class="btn-sm btn-danger ptz-btn" ptzmove="left">Left</button>
-                            <button type="button" class="btn-sm btn-danger ptz-btn" ptzmove="right">Right</button>
-                            <button type="button" class="btn-sm btn-danger ptz-btn" ptzmove="up">Up</button>
-                            <button type="button" class="btn-sm btn-danger ptz-btn" ptzmove="down">Down</button>
+                            <div class="buttons-box">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="up_fast"><span aria-hidden="true" class="octicon octicon-arrow-up"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="up"><span aria-hidden="true" class="octicon octicon-arrow-small-up"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="left_fast"><span aria-hidden="true" class="octicon octicon-arrow-left"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="left"><span aria-hidden="true" class="octicon octicon-arrow-small-left"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="right"><span aria-hidden="true" class="octicon octicon-arrow-small-right"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="right_fast"><span aria-hidden="true" class="octicon octicon-arrow-right"></span></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="down"><span aria-hidden="true" class="octicon octicon-arrow-small-down"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn-sm btn-danger ptz-btn center-block" ptzmove="down_fast"><span aria-hidden="true" class="octicon octicon-arrow-down"></span></button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                </div>
+                            </div>
+
+
                         {% endif %}
                     </div>
                 {% endfor %}

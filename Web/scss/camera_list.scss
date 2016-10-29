@@ -6,5 +6,23 @@ body.camera_list{
   .card.camera{
     min-height: 465px;
   }
+  .buttons-box{
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    float: none;
+    div{
+      padding: 0;
+    }
+    .ptz-btn{
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      float: none;
+      min-width: 32px;
+      min-height: 32px;
+    }
+  }
 }
 

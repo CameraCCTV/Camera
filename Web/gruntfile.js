@@ -65,6 +65,7 @@ module.exports = function (grunt) {
                     'public/dist/css/<%= pkg.name %>.min.css': [
                         'public/dist/css/bootstrap.css',
                         //'public/dist/css/theme.css',
+                        'public/dist/css/octicons/*.css',
                         'public/dist/css/album.css',
                         'public/dist/css/camera_list.css',
                         //'public/dist/css/home.css',
