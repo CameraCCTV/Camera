@@ -7,7 +7,7 @@ RUN add-apt-repository universe && \
     apt-get -yq install \
         ffmpeg \
         unzip \
-        php7.0-cli php7.0-curl php7.0-zip && \
+        php7.0-cli php7.0-curl php7.0-zip php7.0-xml && \
     apt-get -yq upgrade && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \

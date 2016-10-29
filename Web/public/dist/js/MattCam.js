@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 ;/**
  * @license
- * Video.js 5.12.3 <http://videojs.com/>
+ * Video.js 5.12.5 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -15044,6 +15044,12 @@ var DurationDisplay = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this, player, options));
 
     _this.on(player, 'durationchange', _this.updateContent);
+
+    // Also listen for timeupdate and loadedmetadata because removing those
+    // listeners could have broken dependent applications/libraries. These
+    // can likely be removed for 6.0.
+    _this.on(player, 'timeupdate', _this.updateContent);
+    _this.on(player, 'loadedmetadata', _this.updateContent);
     return _this;
   }
 
@@ -22961,79 +22967,6 @@ Html5.isSupported = function () {
   return !!Html5.TEST_VID.canPlayType;
 };
 
-// Add Source Handler pattern functions to this tech
-_tech2['default'].withSourceHandlers(Html5);
-
-/**
- * The default native source handler.
- * This simply passes the source to the video element. Nothing fancy.
- *
- * @param  {Object} source   The source object
- * @param  {Html5} tech  The instance of the HTML5 tech
- */
-Html5.nativeSourceHandler = {};
-
-/**
- * Check if the video element can play the given videotype
- *
- * @param  {String} type    The mimetype to check
- * @return {String}         'probably', 'maybe', or '' (empty string)
- */
-Html5.nativeSourceHandler.canPlayType = function (type) {
-  // IE9 on Windows 7 without MediaPlayer throws an error here
-  // https://github.com/videojs/video.js/issues/519
-  try {
-    return Html5.TEST_VID.canPlayType(type);
-  } catch (e) {
-    return '';
-  }
-};
-
-/**
- * Check if the video element can handle the source natively
- *
- * @param  {Object} source  The source object
- * @param  {Object} options The options passed to the tech
- * @return {String}         'probably', 'maybe', or '' (empty string)
- */
-Html5.nativeSourceHandler.canHandleSource = function (source, options) {
-
-  // If a type was provided we should rely on that
-  if (source.type) {
-    return Html5.nativeSourceHandler.canPlayType(source.type);
-
-    // If no type, fall back to checking 'video/[EXTENSION]'
-  } else if (source.src) {
-    var ext = Url.getFileExtension(source.src);
-
-    return Html5.nativeSourceHandler.canPlayType('video/' + ext);
-  }
-
-  return '';
-};
-
-/**
- * Pass the source to the video element
- * Adaptive source handlers will have more complicated workflows before passing
- * video data to the video element
- *
- * @param  {Object} source   The source object
- * @param  {Html5}  tech     The instance of the Html5 tech
- * @param  {Object} options  The options to pass to the source
- */
-Html5.nativeSourceHandler.handleSource = function (source, tech, options) {
-  tech.setSrc(source.src);
-};
-
-/*
- * Clean up the source handler when disposing the player or switching sources..
- * (no cleanup is needed when supporting the format natively)
- */
-Html5.nativeSourceHandler.dispose = function () {};
-
-// Register the native source handler
-Html5.registerSourceHandler(Html5.nativeSourceHandler);
-
 /**
  * Check if the volume can be changed in this browser/device.
  * Volume cannot be changed in a lot of mobile devices.
@@ -23560,6 +23493,79 @@ Html5.resetMediaElement = function (el) {
     return this.el_[prop]();
   };
 });
+
+// Add Source Handler pattern functions to this tech
+_tech2['default'].withSourceHandlers(Html5);
+
+/**
+ * The default native source handler.
+ * This simply passes the source to the video element. Nothing fancy.
+ *
+ * @param  {Object} source   The source object
+ * @param  {Html5} tech  The instance of the HTML5 tech
+ */
+Html5.nativeSourceHandler = {};
+
+/**
+ * Check if the video element can play the given videotype
+ *
+ * @param  {String} type    The mimetype to check
+ * @return {String}         'probably', 'maybe', or '' (empty string)
+ */
+Html5.nativeSourceHandler.canPlayType = function (type) {
+  // IE9 on Windows 7 without MediaPlayer throws an error here
+  // https://github.com/videojs/video.js/issues/519
+  try {
+    return Html5.TEST_VID.canPlayType(type);
+  } catch (e) {
+    return '';
+  }
+};
+
+/**
+ * Check if the video element can handle the source natively
+ *
+ * @param  {Object} source  The source object
+ * @param  {Object} options The options passed to the tech
+ * @return {String}         'probably', 'maybe', or '' (empty string)
+ */
+Html5.nativeSourceHandler.canHandleSource = function (source, options) {
+
+  // If a type was provided we should rely on that
+  if (source.type) {
+    return Html5.nativeSourceHandler.canPlayType(source.type);
+
+    // If no type, fall back to checking 'video/[EXTENSION]'
+  } else if (source.src) {
+    var ext = Url.getFileExtension(source.src);
+
+    return Html5.nativeSourceHandler.canPlayType('video/' + ext);
+  }
+
+  return '';
+};
+
+/**
+ * Pass the source to the video element
+ * Adaptive source handlers will have more complicated workflows before passing
+ * video data to the video element
+ *
+ * @param  {Object} source   The source object
+ * @param  {Html5}  tech     The instance of the Html5 tech
+ * @param  {Object} options  The options to pass to the source
+ */
+Html5.nativeSourceHandler.handleSource = function (source, tech, options) {
+  tech.setSrc(source.src);
+};
+
+/*
+ * Clean up the source handler when disposing the player or switching sources..
+ * (no cleanup is needed when supporting the format natively)
+ */
+Html5.nativeSourceHandler.dispose = function () {};
+
+// Register the native source handler
+Html5.registerSourceHandler(Html5.nativeSourceHandler);
 
 _component2['default'].registerComponent('Html5', Html5);
 _tech2['default'].registerTech('Html5', Html5);
@@ -28601,14 +28607,6 @@ var logByType = exports.logByType = function logByType(type, args) {
   var stringify = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : !!_browser.IE_VERSION && _browser.IE_VERSION < 11;
 
 
-  // If there's no console then don't try to output messages, but they will
-  // still be stored in `log.history`.
-  //
-  // Was setting these once outside of this function, but containing them
-  // in the function makes it easier to test cases where console doesn't exist
-  // when the module is executed.
-  var fn = _window2['default'].console && _window2['default'].console[type] || function () {};
-
   if (type !== 'log') {
 
     // add the type to the front of the message when it's not "log"
@@ -28620,6 +28618,19 @@ var logByType = exports.logByType = function logByType(type, args) {
 
   // add console prefix after adding to history
   args.unshift('VIDEOJS:');
+
+  // If there's no console then don't try to output messages, but they will
+  // still be stored in `log.history`.
+  //
+  // Was setting these once outside of this function, but containing them
+  // in the function makes it easier to test cases where console doesn't exist
+  // when the module is executed.
+  var fn = _window2['default'].console && _window2['default'].console[type];
+
+  // Bail out if there's no console.
+  if (!fn) {
+    return;
+  }
 
   // IEs previous to 11 log objects uselessly as "[object Object]"; so, JSONify
   // objects and arrays for those less-capable browsers.
@@ -28644,7 +28655,7 @@ var logByType = exports.logByType = function logByType(type, args) {
   if (!fn.apply) {
     fn(args);
   } else {
-    fn[Array.isArray(args) ? 'apply' : 'call'](console, args);
+    fn[Array.isArray(args) ? 'apply' : 'call'](_window2['default'].console, args);
   }
 };
 
@@ -29229,7 +29240,7 @@ setup.autoSetupTimeout(1, videojs);
  *
  * @type {String}
  */
-videojs.VERSION = '5.12.3';
+videojs.VERSION = '5.12.5';
 
 /**
  * The global options object. These are the settings that take effect

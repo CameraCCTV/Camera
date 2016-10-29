@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2475041505fba85aa770ce6e396d7ce0",
-    "content-hash": "b787f673c906c333bc57c97b759d500c",
+    "hash": "427d8beb696564d3bde29d13e7ff0f70",
+    "content-hash": "ef0d622ab7814cfd975655e7f6287814",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -179,6 +179,37 @@
             "time": "2016-06-24 23:00:38"
         },
         {
+            "name": "matthewbaggett/php-onvif",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matthewbaggett/ponvif.git",
+                "reference": "d6a4ff69a5c2ae20346183aeab9f258e67c3b1ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matthewbaggett/ponvif/zipball/d6a4ff69a5c2ae20346183aeab9f258e67c3b1ac",
+                "reference": "d6a4ff69a5c2ae20346183aeab9f258e67c3b1ac",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/class.ponvif.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/matthewbaggett/ponvif/tree/master"
+            },
+            "time": "2016-10-29 04:17:36"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -283,9 +314,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "matthewbaggett/php-onvif": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.5.0"
+    },
     "platform-dev": []
 }

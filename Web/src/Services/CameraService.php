@@ -40,7 +40,7 @@ class CameraService extends Service
         if (!$cameras[$camera]['cameraSoap']) {
             throw new CameraServiceException("CAMERA_SOAP is not configured on \"{$camera}\", or is not available.");
         }
-        if (!in_array($action, ['up', 'down', 'left', 'right', 'up_fast', 'down_fast', 'left_fast', 'right_fast'])) {
+        if (!in_array($action, ['up', 'down', 'left', 'right', 'up_fast', 'down_fast', 'left_fast', 'right_fast', 'update_time'])) {
             throw new CameraServiceException("PTZ action {$action} is not a valid action.");
         }
         $soapPath = parse_url($cameras[$camera]['cameraSoap']);
@@ -102,6 +102,9 @@ class CameraService extends Service
                         usleep(0.5*1000000);
                         $ponvif->ptz_RelativeMove($profileToken, 0, $step * -1, 0, $step);
                     }
+                    break;
+                case 'update_time':
+                    $ponvif->core_SetSystemDateAndTime();
                     break;
             }
         }catch(\Exception $e){

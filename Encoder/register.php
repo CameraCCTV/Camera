@@ -25,3 +25,18 @@ $res = $client->request('POST', "{$baseUrl}/register-camera.php", [
 
 echo $res->getBody();
 // {"type":"User"...'
+
+if(isset($environment['CAMERA_SOAP'])) {
+    $soapPath = parse_url($environment['CAMERA_SOAP']);
+
+    $ponvif = new \ponvif();
+
+    $ponvif->setUsername('guest');
+    $ponvif->setPassword('guest');
+    $ponvif->setDeviceUri($environment['CAMERA_SOAP'] . '/onvif/device_service');
+    $ponvif->setIPAddress($soapPath['host']);
+
+    $ponvif->initialize();
+
+    $ponvif->core_SetSystemDateAndTime();
+}

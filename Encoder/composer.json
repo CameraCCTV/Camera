@@ -1,6 +1,14 @@
 {
     "name": "matthewbaggett/camera-encoder-registration",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:matthewbaggett/ponvif.git"
+        }
+    ],
     "require": {
+        "php": ">=5.5.0",
+        "matthewbaggett/php-onvif": "dev-master",
         "raveren/kint": "^1.0",
         "guzzlehttp/guzzle": "^6.2"
     },
