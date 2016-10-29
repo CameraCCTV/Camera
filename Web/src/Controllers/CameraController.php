@@ -29,9 +29,32 @@ class CameraController extends Controller{
     public function renderHomepage(Request $request, Response $response, array $args = [])
     {
         $cameras = $this->cameraService->getListOfCameras();
+        $mode = "list";
+        if(isset($args['camera_name'])){
+            $mode = "single";
+            if(!isset($cameras[$args['camera_name']])){
+                return $response->withRedirect("/");
+            }
+            $cameras = [$cameras[$args['camera_name']]];
+        }
         return $this->renderer->render(
             $response,
-            'home/home.html.twig',
+            'cameras/all.html.twig',
+            [
+                'streaming_service_url' => $this->environment['SERVICE_1_ENV_VIRTUAL_HOST'],
+                'body_class' => "camera_{$mode}",
+                'cameras' => $cameras,
+            ]
+        );
+    }
+
+    public function renderSingleCamera(Request $request, Response $response, array $args = [])
+    {
+        $cameras = $this->cameraService->getListOfCameras();
+        $cameras = [$cameras[$args['camera_name']]];
+        return $this->renderer->render(
+            $response,
+            'cameras/all.html.twig',
             [
                 'streaming_service_url' => $this->environment['SERVICE_1_ENV_VIRTUAL_HOST'],
                 'body_class' => "camera_list",

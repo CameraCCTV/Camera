@@ -1,27 +1,44 @@
-/* line 2, ../../../scss/camera_list.scss */
-body.camera_list .container {
+/* line 3, ../../../scss/camera_list.scss */
+body.camera_list .container,
+body.camera_single .container {
   width: 1330px;
   max-width: 1330px; }
-/* line 6, ../../../scss/camera_list.scss */
-body.camera_list .card.camera {
+/* line 7, ../../../scss/camera_list.scss */
+body.camera_list .card.camera,
+body.camera_single .card.camera {
   min-height: 465px; }
-/* line 9, ../../../scss/camera_list.scss */
-body.camera_list .buttons-box {
+/* line 10, ../../../scss/camera_list.scss */
+body.camera_list .buttons-box,
+body.camera_single .buttons-box {
   width: 160px;
   margin-left: auto;
   margin-right: auto;
   display: block;
   float: none; }
-  /* line 15, ../../../scss/camera_list.scss */
-  body.camera_list .buttons-box div {
+  /* line 16, ../../../scss/camera_list.scss */
+  body.camera_list .buttons-box div,
+  body.camera_single .buttons-box div {
     padding: 0; }
-  /* line 18, ../../../scss/camera_list.scss */
-  body.camera_list .buttons-box .ptz-btn {
+  /* line 19, ../../../scss/camera_list.scss */
+  body.camera_list .buttons-box .ptz-btn,
+  body.camera_single .buttons-box .ptz-btn {
     margin-left: auto;
     margin-right: auto;
     display: block;
     float: none;
     min-width: 32px;
     min-height: 32px; }
+
+/* line 31, ../../../scss/camera_list.scss */
+body.camera_single .container {
+  width: 1330px;
+  max-width: 1330px; }
+/* line 35, ../../../scss/camera_list.scss */
+body.camera_single .card.camera {
+  min-height: 465px;
+  width: 100%; }
+/* line 39, ../../../scss/camera_list.scss */
+body.camera_single div.video-window {
+  width: 100% !important; }
 
 /*# sourceMappingURL=camera_list.css.map */

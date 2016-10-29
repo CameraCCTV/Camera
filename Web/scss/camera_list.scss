@@ -1,4 +1,5 @@
-body.camera_list{
+body.camera_list,
+body.camera_single{
   .container{
     width: 1330px;
     max-width: 1330px;
@@ -26,3 +27,19 @@ body.camera_list{
   }
 }
 
+body.camera_single{
+  .container{
+    width: 1330px;
+    max-width: 1330px;
+  }
+  .card.camera{
+    min-height: 465px;
+    width: 100%;
+  }
+  div.video-window{
+    width: 100% !important;
+    video{
+
+    }
+  }
+}

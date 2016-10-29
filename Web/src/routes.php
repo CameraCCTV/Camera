@@ -2,7 +2,9 @@
 // Routes
 
 $app->get('/', \MattCam\Controllers\CameraController::class . ":renderHomepage");
-$app->map(['get','post'], '/camera/ptz', \MattCam\Controllers\CameraController::class . ":doPtz");
+$app->get('/camera/{camera_name}', \MattCam\Controllers\CameraController::class . ":renderHomepage");
+
+$app->post('/camera/ptz', \MattCam\Controllers\CameraController::class . ":doPtz");
 
 $app->group("/api", function(){
     $this->group("/v1", function(){
