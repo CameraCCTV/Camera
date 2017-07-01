@@ -6,7 +6,7 @@ require_once("vendor/autoload.php");
 
 $cameraName   = $environment['CAMERA_NAME'];
 $cameraSource = $environment['CAMERA_SOURCE'];
-$service = parse_url($environment['SERVICE_PORT']);
+$service = parse_url($environment['SERVICE_HOST']);
 $baseUrl = "http://{$service['host']}:{$service['port']}";
 echo "Registering Camera {$cameraName} with service\n";
 $registrationJson = [
