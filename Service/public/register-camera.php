@@ -16,7 +16,7 @@ foreach($requestBody as $k => $v){
 }
 $config = \Symfony\Component\Yaml\Yaml::dump($config);
 
-echo "Writing to {$configPath}\n";
+echo "Writing ". strlen($config) . " bytes to {$configPath}\n";
 
 if(!file_exists(dirname($configPath))){
     mkdir(dirname($configPath), 0777, true);
@@ -28,6 +28,7 @@ if($bytes){
     echo "Wrote {$bytes} to {$configPath}\n";
 }else{
     echo "Failed to write to {$configPath} :c\n";
+    exit;
 }
 
 $configs = [];
@@ -40,7 +41,7 @@ foreach(scandir($configDir) as $item){
     }
 }
 
-$maxClients = isset($environment['SERVER_MAX_CLIENTS']) ? $environment['SERVER_MAX_CLIENTS'] : "30";
+$maxClients   = isset($environment['SERVER_MAX_CLIENTS']) ? $environment['SERVER_MAX_CLIENTS'] : "30";
 $maxBandwidth = isset($environment['SERVER_MAX_BANDWIDTH']) ? $environment['SERVER_MAX_BANDWIDTH'] : "60000";
 $videoBitRate = isset($environment['VIDEO_BIT_RATE']) ? $environment['VIDEO_BIT_RATE'] : "3000";
 
@@ -134,6 +135,10 @@ foreach($configs as $config){
 $bytesWrittenToTemp = file_put_contents("/app/conf/ffserver.conf", $ffserverConfig);
 
 $bytesWrittenToEtc =  file_put_contents("/etc/ffserver.conf", $ffserverConfig);
+
+echo "New ffserver config:\n";
+echo $ffserverConfig;
+echo "\n\n\n";
 
 if(!$bytesWrittenToTemp){
     echo "Could not write to /app/conf/ffserver.conf!\n";
