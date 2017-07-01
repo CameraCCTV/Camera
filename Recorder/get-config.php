@@ -4,7 +4,7 @@ ksort($environment);
 
 require_once("vendor/autoload.php");
 
-$service = parse_url($environment['SERVICE_PORT']);
+$service = parse_url($environment['SERVICE_HOST']);
 $baseUrl = "http://{$service['host']}:{$service['port']}";
 echo "Getting camera data...\n";
 $client = new GuzzleHttp\Client();

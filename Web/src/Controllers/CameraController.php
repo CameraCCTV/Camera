@@ -41,7 +41,7 @@ class CameraController extends Controller{
             $response,
             'cameras/all.html.twig',
             [
-                'streaming_service_url' => $this->environment['SERVICE_1_ENV_VIRTUAL_HOST'],
+                'streaming_service_url' => $this->environment['STREAMING_HOST'],
                 'body_class' => "camera_{$mode}",
                 'cameras' => $cameras,
             ]

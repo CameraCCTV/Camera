@@ -12,7 +12,7 @@ class CameraService extends Service
     {
         $environment = array_merge($_ENV, $_SERVER);
         ksort($environment);
-        $service = parse_url($environment['SERVICE_PORT']);
+        $service = parse_url($environment['SERVICE_HOST']);
         $client = new GuzzleClient(['base_uri' => "http://{$service['host']}:{$service['port']}"]);
         $res = $client->request('GET', "/get-cameras.php");
 

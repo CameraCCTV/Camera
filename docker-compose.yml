@@ -3,31 +3,35 @@ volumes:
   cctv-data:
 
 services:
-#  haproxy:
-#    image: tutum/haproxy:latest
-#    environment:
-#      - 'STATS_AUTH=stats:CaptainMorgan'
-#      - TIMEOUT=connect 50000, client 500000, server 500000
-#    links:
-#      - web
-#      - service
-#    ports:
-#      - '127.0.4.1:80:80'
-#      - '127.0.4.1:1936:1936'
-#    restart: always
+  haproxy:
+    image: dockercloud/haproxy:1.6.7
+    environment:
+      - 'STATS_AUTH=stats:CaptainMorgan'
+      - TIMEOUT=connect 50000, client 500000, server 500000
+    links:
+      - web
+      - service
+    ports:
+      - '127.0.4.1:80:80'
+      - '127.0.4.1:1936:1936'
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
-#  web:
-#    image: camera/web
-#    build: ./Web
-#    links:
-#      - service
-#    volumes:
-#     - "./Web:/app"
-#    environment:
-#     - VIRTUAL_HOST=cams.dev
-#     - SERVER_MAX_CLIENTS=30
-#     - SERVER_MAX_BANDWIDTH=600000
-#     - VIDEO_BIT_RATE=13333
+  web:
+    image: camera/web
+    build: ./Web
+    links:
+      - service
+    volumes:
+     - "./Web:/app"
+    environment:
+     - SERVICE_HOST=tcp://service:80
+     - STREAMING_HOST=http://streams.cams.dev
+     - VIRTUAL_HOST=cams.dev
+     - SERVER_MAX_CLIENTS=30
+     - SERVER_MAX_BANDWIDTH=600000
+     - VIDEO_BIT_RATE=13333
 
   service:
     image: camera/server
@@ -35,7 +39,7 @@ services:
     volumes:
      - "./Service:/app"
     environment:
-     - VIRTUAL_HOST=stream.cams.dev
+     - VIRTUAL_HOST=streams.cams.dev
      - EXCLUDE_PORTS=80
      - SERVER_MAX_CLIENTS=30
      - SERVER_MAX_BANDWIDTH=600000
@@ -44,22 +48,6 @@ services:
     ports:
      - '127.0.4.1:8080:8080'
 
-#  encoder_back:
-#    build: ./Encoder
-#    volumes:
-#     - "./Encoder:/app"
-#    links:
-#     - service
-#    environment:
-#     - SERVICE_HOST=tcp://service:80
-#     - CAMERA_NAME=back
-#     - CAMERA_SOURCE=rtsp://guest:guest@10.88.200.50:554/onvif1
-#     - CAMERA_SOAP=http://10.88.200.50:5000
-#     - CAMERA_OPTIONS=-rtsp_transport udp
-#     - CAMERA_AUDIO_DISABLED=disabled
-#     - CAMERA_ENABLE_PTZ=yes
-#     - CAMERA_OPTIONS="-vf \"transpose=2,transpose=2\""
-#
   encoder_front:
     image: camera/encoder
     build: ./Encoder
@@ -70,17 +58,35 @@ services:
     environment:
      - SERVICE_HOST=tcp://service:80
      - CAMERA_NAME=front
+     - CAMERA_SOURCE=rtsp://guest:guest@10.88.200.50:554/onvif1
+     - CAMERA_SOAP=http://10.88.200.50:5000
+     - CAMERA_OPTIONS=-rtsp_transport udp
+     - CAMERA_AUDIO_DISABLED=disabled
+     - CAMERA_ENABLE_PTZ=yes
+
+  encoder_back:
+    build: ./Encoder
+    volumes:
+     - "./Encoder:/app"
+    links:
+     - service
+    environment:
+     - SERVICE_HOST=tcp://service:80
+     - CAMERA_NAME=back
      - CAMERA_SOURCE=rtsp://guest:guest@10.88.200.51:554/onvif1
      - CAMERA_SOAP=http://10.88.200.51:5000
      - CAMERA_OPTIONS=-rtsp_transport udp
      - CAMERA_AUDIO_DISABLED=disabled
      - CAMERA_ENABLE_PTZ=yes
 
-#  recorder:
-#    image: camera/recorder
-#    build: ./Recorder
-#    volumes:
-#      - cctv-data:/video:Z
-#      - "./Recorder:/app"
-#    links:
-#     - service
+  recorder:
+    image: camera/recorder
+    build: ./Recorder
+    volumes:
+      - cctv-data:/video:Z
+      - "./Recorder:/app"
+    links:
+     - service
+    environment:
+     - SERVICE_HOST=tcp://service:80
+

@@ -17,3 +17,4 @@ composer install;
 cd -;
 
 docker-compose build;
+docker-compose push;
