@@ -1,6 +1,7 @@
 FROM thruio/docker-webapp
 
 RUN apt-get update && \
+    apt-get -yq install sudo && \
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
     apt-get -yq install nodejs ruby && \
     apt-get clean && \
